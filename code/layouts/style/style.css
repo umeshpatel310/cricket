@@ -1,0 +1,51 @@
+.lay3 img{
+    height: 60px;
+    
+
+}
+
+.lay3{
+    position: fixed;  /* Fix the position relative to the viewport */
+    bottom: 10px;        /* Align it at the bottom */
+    left: 0;          /* Align it to the left side of the page */
+    width: 100%;   
+      /* Make it span the full width */
+    
+    
+    
+ 
+  
+    z-index: 1000;  
+}
+.lay4 img{
+    height: 60px;
+    
+}
+
+.lay4{
+
+    position: fixed;  /* Fix the position relative to the viewport */
+    bottom: 10px;        /* Align it at the bottom */
+    left: 0;          /* Align it to the left side of the page */
+    width: 100%;   
+      /* Make it span the full width */
+
+    z-index: 1000;  
+}
+
+.over {
+    background-color: rgb(41, 40, 41);
+    width: 20px; /* Ball width */
+    height: 20px; /* Ball height */
+    /* Makes it a circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+    margin-left: 5px;
+    
+}

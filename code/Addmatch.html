@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Match Details</title>
+    <script type="module"  src="layouts/scripts/tmlogo.js" ></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        input {
+            height: 25px;
+            width: 180px;
+            margin-left: 9px;
+        }
+
+        .player {
+            margin-bottom: 8px;
+        }
+
+        .team button {
+            background-color: cornflowerblue;
+            border-radius: 5px;
+        }
+
+        /* Progress bar styling */
+        #progress-bar-container {
+            width: 100%;
+            height: 25px;
+            background-color: #f3f3f3;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: green;
+            border-radius: 5px;
+        }
+
+        #uploadingNotification {
+            display: none;
+            color: blue;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        progress {
+            width: 100%;
+            height: 20px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 style=" color: #f8f4f4; font-size: 30px; margin-bottom: 20px; text-transform: uppercase;background-color: #007bff; font-style: italic;">Honest Layout.com</h1>
+<h2>Cricket Match Details</h1>
+
+<!-- Match Form (visible after authentication) -->
+<div id="form-container" style="display:none;">
+    <div class="form-container">
+        <!-- Match Name -->
+        <div style="display: grid; align-items: center; justify-content: center; " class="lab">
+            <label style="font-size: 12px; padding-top: 1px;" for="location" >Match Name</label>
+            <input style=" margin-top: 5px;" type="text" id="matchName" placeholder="Enter Match Name" required>
+            
+        </div>
+    
+
+        <!-- Match Info (Location, Time, Status) -->
+        <div class="matchInfo">
+            <div style="display: grid; align-items: center; justify-content: center; " class="lab">
+                <label style="font-size: 12px; padding-top: 1px;" for="location" >Match locetion</label>
+                <input style=" margin-top: 5px;" type="text" id="location" placeholder="Enter Match Location" required>
+                
+            </div>
+            <div style="display: grid; align-items: center; justify-content: center; " class="lab">
+                <label style="font-size: 12px; padding-top: 1px;" for="location" >matchTime</label>
+                <input style=" margin-top: 5px;" type="text" id="matchTime" placeholder="Enter matchTime" required>
+                
+            </div>
+            <div style="display: grid; align-items: center; justify-content: center; " class="lab">
+                <label style="font-size: 12px; padding-top: 1px;" for="location" >status</label>
+                <input style=" margin-top: 5px;" type="text" id="status" placeholder="Enter status" required>
+                
+            </div>
+            
+           
+           
+        </div>
+
+        <!-- Teams (Dynamic Input for Team A and Team B) -->
+        <div class="teams">
+            <div style="display: grid; align-items: center; justify-content: center; " class="lab">
+                <label style="font-size: 12px; padding-top: 1px;" for="location" >Team A Name</label>
+                <input style=" margin-top: 5px;" type="text" id="teamA" placeholder="Enter Team A Name" required>
+                
+            </div>
+            <div style="display: grid; align-items: center; justify-content: center; " class="lab">
+                <label style="font-size: 12px; padding-top: 1px;" for="location" >Team B Name</label>
+                <input style=" margin-top: 5px;" type="text" id="teamB" placeholder="Enter Team B Name" required>
+                
+            </div>
+           
+            
+        </div>
+
+        <button style="margin-top: 5px; border-radius: 5px; background-color: rgb(10, 8, 8); color: #f3f3f3;" id="saveMatchInfo">Save Match Info</button>
+
+        <!-- Team A Players -->
+        <h3>Team A Players</h3>
+
+        <div style="background-color: cadetblue; border-radius: 5px;">
+
+            <div style="display: grid; justify-content: center; margin-bottom: 20px;" >
+
+                <label > Team A Logo</label>
+                <input type="file" id="imageInput1" accept="image/*" placeholder="Team A Logo">
+            </div>
+            <div style="display: grid; justify-content: center; margin-bottom: 20px;" >
+    
+                <label > Team B Logo</label>
+                <input type="file" id="imageInput2" accept="image/*">
+    
+                <button style="margin-top: 5px; font-size: 15px; background-color: rgb(66, 133, 28) ; border-radius: 5px;" id="uploadButton">Upload Images</button>
+            </div>
+            
+        </div>
+
+        <div id="uploadingNotification">
+            Uploading... Please wait.
+        </div>
+    
+        <!-- Progress bars -->
+        <progress id="progressBar1" value="0" max="100"></progress>
+        <progress id="progressBar2" value="0" max="100"></progress>
+          <!-- Display Uploaded Images -->
+    <div id="uploadedImagesContainer" style="margin-top: 20px ; display: none;">
+        <h3>Uploaded Images:</h3>
+        <img id="uploadedImage1" src="" alt="Uploaded Image 1" style="max-width: 500px; display: none;">
+        <img id="uploadedImage2" src="" alt="Uploaded Image 2" style="max-width: 500px; display: none;">
+    </div>
+
+       
+
+
+       
+        
+        <div class="team teamA">
+            <div style="display: flex; align-items: center;" class="player">
+                <input type="text" placeholder="Player Name" id="playerNameA">
+                <input type="file" accept="image/*" id="playerImageA">
+                <input style="display: none;" type="number" id="batrunA" value="0">
+                <input style="display: none;" type="number" id="wicketA" value="0">
+                <input style="display: none;" type="number" id="four" value="0">
+                <input style="display: none;" type="number" id="six" value="0">
+                <input style="display: none;" type="number" id="bowrun" value="0">
+                <input style="display: none;" type="number" id="bball" value="0">
+                <input style="display: none;" type="number" id="bowball" value="0">
+            </div>
+            <button id="btna">Add Player</button>
+        </div>
+
+        <!-- Team B Players -->
+        <h2>Team B Players</h2>
+        <div class="team teamB">
+            <div style="display: flex; align-items: center;" class="player">
+                <input type="text" placeholder="Player Name" id="playerNameB">
+                <input type="file" accept="image/*" id="playerImageB">
+                <input style="display: none;" type="number" id="batrunB" value="0">
+                <input style="display: none;" type="number" id="wicketB" value="0">
+                <input style="display: none;" type="number" id="four" value="0">
+                <input style="display: none;" type="number" id="six" value="0">
+                <input style="display: none;" type="number" id="bowrun" value="0">
+                <input style="display: none;" type="number" id="bball" value="0">
+                <input style="display: none;" type="number" id="bowball" value="0">
+            </div>
+            <button id="btnb">Add Player</button>
+        </div>
+
+        <!-- Button to save match info -->
+       
+
+         <!-- Uploading Notification -->
+   
+
+        <!-- Progress Bar -->
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <button onclick="window.location.href='home.html'" id="goToScoreboardBtn" style="width: 97%; font-size: 15px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; background-color: rgb(22, 22, 22); color: #f3f3f3; margin-top: 25px; margin-bottom: 150px;">
+            Go to Scoreboard
+        </button>
+    </div>
+    
+</div>
+
+
+
+<!-- Firebase SDKs -->
+<script type="module">
+    // Firebase configuration (replace with your actual config)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+        authDomain: "testapp-6bd8a.firebaseapp.com",
+        databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+        projectId: "testapp-6bd8a",
+        storageBucket: "testapp-6bd8a.appspot.com",
+        messagingSenderId: "1083835564982",
+        appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+    };
+
+    // Importing Firebase services (modular approach)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+    import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+    const auth = getAuth(app);
+
+   
+
+    // Listen for authentication state changes
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Current user is logged in
+            const currentUserId = user.uid;
+            console.log("Logged in as:", currentUserId);
+
+            // Show match form after login
+            document.getElementById('form-container').style.display = 'block';
+
+            // Save match info
+            document.getElementById('saveMatchInfo').addEventListener('click', function () {
+                const matchName = document.getElementById('matchName').value;
+                const location = document.getElementById('location').value;
+                const matchTime = document.getElementById('matchTime').value;
+                const status = document.getElementById('status').value;
+                const teamAName = document.getElementById('teamA').value;
+                const teamBName = document.getElementById('teamB').value;
+
+                if (matchName && location && matchTime && status && teamAName && teamBName) {
+                    saveMatchInfo(matchName, location, matchTime, status, teamAName, teamBName, currentUserId);
+                }
+            });
+
+            // Add player data for team A or team B
+            document.getElementById('btna').addEventListener('click', function () {
+                const playerName = document.getElementById('playerNameA').value;
+                const playerImageFile = document.getElementById('playerImageA').files[0];
+                const batRun = document.getElementById('batrunA').value;
+                const wicket = document.getElementById('wicketA').value;
+                const four = document.getElementById('four').value;
+                const six = document.getElementById('six').value;
+                const bowrun = document.getElementById('bowrun').value;
+                const bball = document.getElementById('bball').value;
+                const bowball = document.getElementById('bowball').value;
+                const teamAName = document.getElementById('teamA').value;
+                const matchName = document.getElementById('matchName').value;
+
+                if (playerName && playerImageFile && teamAName && matchName) {
+                    uploadPlayerData('teamA', playerName, playerImageFile, batRun, wicket, four, six, bowrun, bball, bowball, currentUserId, teamAName, matchName);
+                }
+            });
+
+            document.getElementById('btnb').addEventListener('click', function () {
+                const playerName = document.getElementById('playerNameB').value;
+                const playerImageFile = document.getElementById('playerImageB').files[0];
+                const batRun = document.getElementById('batrunB').value;
+                const wicket = document.getElementById('wicketB').value;
+                const four = document.getElementById('four').value;
+                const six = document.getElementById('six').value;
+                const bowrun = document.getElementById('bowrun').value;
+                const bball = document.getElementById('bball').value;
+                const bowball = document.getElementById('bowball').value;
+                const teamBName = document.getElementById('teamB').value;
+                const matchName = document.getElementById('matchName').value;
+
+                if (playerName && playerImageFile && teamBName && matchName) {
+                    uploadPlayerData('teamB', playerName, playerImageFile, batRun, wicket, four, six, bowrun, bball, bowball, currentUserId, teamBName, matchName);
+                }
+            });
+        } else {
+            // User is logged out, hide match form
+            document.getElementById('form-container').style.display = 'none';
+        }
+    });
+
+    
+
+    
+
+
+    // Function to upload player data
+    function uploadPlayerData(team, playerName, playerImageFile, batRun, wicket, four, six, bowrun, bball, bowball, userId, teamName, matchName) {
+        document.getElementById('progress-bar-container').style.display = 'block';
+
+        const storagePath = `players/${team}/${playerName}.jpg`;
+        const playerImageRef = storageRef(storage, storagePath);
+
+        const uploadTask = uploadBytesResumable(playerImageRef, playerImageFile);
+
+        uploadTask.on('state_changed', 
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                document.getElementById('progress-bar').style.width = progress + '%';
+            },
+            (error) => {
+                console.error("Error uploading image:", error);
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    const playerData = {
+                        name: playerName,
+                        image: url,
+                        batRun: batRun,
+                        wicket: wicket,
+                        four: four,
+                        six: six,
+                        bowrun: bowrun,
+                        bball: bball,
+                        bowball: bowball
+                    };
+
+                    const playerRef = ref(database, `cricketmatch/${userId}/${matchName}/team/${teamName}/${playerName}`);
+                    set(playerRef, playerData);
+                    alert("Player data saved!");
+                });
+            }
+        );
+    }
+
+    // Function to save match info
+    function saveMatchInfo(matchName, location, matchTime, status, teamAName, teamBName, userId) {
+        const matchData = {
+            matchName: matchName,
+            location: location,
+            matchTime: matchTime,
+            status: status,
+            teamA: teamAName,
+            teamB: teamBName
+        };
+
+        const matchRef = ref(database, `cricketmatch/${userId}/${matchName}/matchinfo`);
+        set(matchRef, matchData);
+        alert("Match info saved!");
+    }
+</script>
+
+</body>
+</html>

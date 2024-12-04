@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Matches</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            text-align: center;
+            padding: 2px;
+        }
+
+        /* Heading style */
+        h1 {
+            color: #f8f4f4;
+            font-size: 30px;
+            margin-bottom: 20px;
+           
+            text-transform: uppercase;
+            background-color: #007bff;
+            font-style: italic;
+
+        }
+
+        /* Button styles */
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 14px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-bottom: 30px;
+            
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* My Matches Section */
+        .mymatch {
+            display: grid;            
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+            
+            
+        }
+
+        /* Match Item Styling */
+        .match {
+            padding: 5px;
+            margin: 12px;
+           
+            justify-content: space-around;
+            display: flex;
+            border-radius: 12px;
+            border: 1px solid #1b1a1a; /* Yahan border color specify kiya gaya hai */
+            width: 100%;
+           
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .match:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(255, 9, 9, 0.15);
+        }
+
+        /* Match Info */
+        .cp {           
+            font-size: 15px;
+            color: #fffbfb;
+            background-color: #212ab4;
+            border-radius: 5px;
+            padding: 4px;       
+        }
+
+        /* Alert for when no matches are found */
+        .mymatch p {
+            font-size: 15px;
+            color: #0f0f0f;
+            font-style: bold;
+            padding-left: 10px;
+           
+
+        }
+        /* Responsive Design */
+        .mp{
+            background-color: #0056b3;
+            color: white;
+            padding: 3px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    
+    <h1 style=" color: #f8f4f4;
+    font-size: 30px;
+    margin-bottom: 20px;
+   
+    text-transform: uppercase;
+    background-color: #007bff;
+    font-style: italic;">Honest Layout.com</h1>
+   <button class="addm" id="admatch" onclick="window.location.href='Addmatch.html';">Add Match</button>
+
+    <p class="mp" >Matches you are Added in:</p>
+
+    <div class="mymatch">
+        <!-- Matches will be displayed here -->
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Firebase configuration (replace with your actual config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+            authDomain: "testapp-6bd8a.firebaseapp.com",
+            databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+            projectId: "testapp-6bd8a",
+            storageBucket: "testapp-6bd8a.appspot.com",
+            messagingSenderId: "1083835564982",
+            appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+        };
+
+        // Import Firebase services (modular approach)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Listen for authentication state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userId = user.uid;
+                loadUserMatches(userId); // Load matches for the current user
+            } else {
+                console.log('No user is signed in');
+            }
+        });
+
+        // Load user matches from Firebase Realtime Database
+        function loadUserMatches(userId) {
+            const myMatchDiv = document.querySelector('.mymatch');
+
+            // Reference to the current user's matches in Firebase Realtime Database
+            const userMatchesRef = ref(database, 'cricketmatch/' + userId);  // Path for user matches
+
+            get(userMatchesRef)
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const matches = snapshot.val();
+                        myMatchDiv.innerHTML = ''; // Clear the div before displaying matches
+
+                        // Loop through the matches and display them
+                        for (const matchId in matches) {
+                            if (matches.hasOwnProperty(matchId)) {
+                                const matchData = matches[matchId];
+                                
+                                // Access matchInfo inside each matchId
+                                const matchinfo = matchData.matchinfo || {};
+                                const status = matchinfo.status || 'No status available';
+                                
+
+                                // Create match display element
+                                const matchDiv = document.createElement('div');
+                                matchDiv.classList.add('match');
+                                matchDiv.innerHTML = `
+                                    <p><strong></strong> ${matchId}</p>
+                                    <p><strong></strong> ${status}</p>
+                                    
+                                    
+                                      <a class="cp" href="controlpanal.html?matchId=${matchId}">Control Panal</a>
+                                      
+                                    
+                                `;
+                                myMatchDiv.appendChild(matchDiv);
+                            }
+                        }
+                    } else {
+                        myMatchDiv.innerHTML = 'No matches found.';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching matches:', error);
+                    myMatchDiv.innerHTML = 'Error loading matches.';
+                });
+        }
+    </script>
+</body>
+</html>

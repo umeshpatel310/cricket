@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width: device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="layouts/scripts/Action.js"></script>
+   
+    
+    <style>
+        /* Existing CSS remains the same */ .mngb {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .mngb label, .mngb input {
+            margin: 10px 0;
+        }
+
+        .mngb input {
+            padding: 8px;
+        }
+
+        .mngb p {
+            font-size: 22px;
+        }
+
+        .lab {
+            display: grid;
+        }
+
+        .btnf {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            flex-direction: row;
+        }
+
+        .btnsec {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            flex-direction: row;
+        }
+
+        .btnsec button {
+            display: flex;
+            font-size: 30px;
+            margin: 10px;
+        }
+
+        .btnf button {
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        .logoo img {
+            width: 50px;
+            height: 50px;
+            padding-left: 20px;
+        }
+
+        .next-over {
+            height: 50px;
+            background-color: blue;
+            color: antiquewhite;
+            padding-top: 3px;
+            margin-bottom: 3px;
+        }
+
+        .ball-input{
+            background-color: rgb(22, 22, 22);
+            width: 20px;
+            color: aliceblue;
+           
+           
+        }
+    </style>
+
+
+<style>
+    /* Existing CSS remains the same */ .mngb {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .mngb label, .mngb input {
+        margin: 10px 0;
+    }
+
+    .mngb input {
+        padding: 6px;
+    }
+
+    .mngb p {
+        font-size: 15px;
+    }
+
+    .lab {
+        display: grid;
+        background-color: rgb(16, 39, 61);
+        padding: 15px;
+        color: white;
+        border-radius: 10px;
+        
+    }
+
+    .btnf {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: row;
+    }
+
+    .btnsec {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: row;
+    }
+
+    .btn{
+        margin-bottom: 50px;
+        background-color: rgb(8, 73, 52);
+    }
+
+    .btnsec button {
+        display: flex;
+        font-size: 30px;
+        margin: 10px;
+    }
+
+    .btnf button {
+        font-size: 40px;
+        margin: 10px;
+    }
+
+    .logoo img {
+        width: 50px;
+        height: 50px;
+        padding-left: 20px;
+    }
+
+    .next-over {
+        height: 50px;
+        background-color: blue;
+        color: antiquewhite;
+        padding-top: 3px;
+        margin-bottom: 3px;
+    }
+
+    .ball-input{
+        background-color: rgb(22, 22, 22);
+        width: 20px;
+        color: aliceblue;
+       
+       
+    }
+
+    .fselect{
+     
+     border: 1px solid rgb(28, 28, 29);
+     height: 35px;
+     color: rgb(2, 2, 2);
+     margin-top: 10px;
+     margin-right: 9px;
+     
+     margin-left: 5px;
+    }
+
+    .chekb{
+        width: 20px;
+        height: 20px;
+       
+       
+    }
+
+    .team-select{
+        margin-top: 27px;
+        background-color: rgb(9, 54, 39);
+        color: white;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .team-selectB{
+      
+        color: white;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .bowler{
+        text-align: center;
+        align-items: center;
+        background-color: rgb(37, 37, 105);
+        color: white;
+        border-radius: 10px;
+        padding: 2px;
+        margin-top: 5px;
+    }
+</style>
+<style>
+    /* Styling for the popup */
+    #popup {
+        display: none ; /* Hidden by default */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(17, 83, 61);
+        padding: 20px;
+        border-radius: 10px;
+        color: #ccc;
+        border: 1px solid #ccc;
+        justify-content: center;
+        text-align: center;
+        
+        z-index: 1000;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Overlay background */
+    #overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    /* Hide all buttons initially inside the option container */
+    #optionContainer button {
+        display: none;
+        margin: 7px;
+       font-size: 17px;
+
+
+    }
+    .optionContainer{
+       justify-content: center;
+        display: grid;
+       
+    }
+    .optionContainer button{
+        background-color: rgb(219, 219, 230);
+        display: grid;
+        color: rgb(11, 12, 12);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        margin-top:  15px;
+       
+
+       
+    }
+
+    .opsbtn{
+        width: 100%;
+        color: white;
+        background-color: rgb(37, 13, 59);
+        font-size: 15px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+    }
+   
+</style>
+
+
+</head>
+<body>
+    <!-- Match Name Input -->
+
+    
+    <h1 style=" color: #f8f4f4; font-size: 30px; margin-bottom: 20px; text-transform: uppercase;background-color: #007bff; font-style: italic;">Honest Layout.com</h1>
+    <p style="background-color: rgb(4, 59, 59); color: #ffffff; text-align: center;"> Match Name</p>
+    <input style="width: 100%; padding: 5px; font-size: 15px; text-align: center; color: white; background-color: #007bff;" type="text" id="matchNameInput"  disabled>
+
+    <div class="mngb">
+       
+       
+        <div style="display: flex;">
+
+            <a style="margin-left: 5px; color: red;" id="lyout" href="#"> Layout 1</a> 
+            <a style="margin-left: 5px; color: red;" id="lyout2" href="#"> Layout 2</a> 
+            <a style="margin-left: 5px; color: red;" id="lyout3" href="#"> Layout 3</a> 
+        </div>
+        
+
+  
+  
+      
+
+          <!-- Option Button -->
+    <button class="opsbtn" id="optionButton">Show Options</button>
+
+    <!-- Option Buttons Container (Initially Hidden) -->
+    <div class="optionContainer" id="optionContainer">
+        <!-- Toss Button (Initially Hidden) -->
+         
+            <button id="tossButton">Toss</button>
+            <button id="closeTossButton">Close Toss</button>
+        
+       
+        <!-- You can add more buttons here in the future -->
+       
+        <button id="scoreboardC"> Team A Scoreboard Show</button>
+        <button id="scoreboardB"> Team B Scoreboard Show</button>
+        <button id="plyerimgS">Team  Show</button>
+
+        
+    </div>
+
+    <!-- Popup for Win and Choose -->
+    <div id="overlay"></div>
+    <div id="popup">
+        <h3>Enter Toss Details</h3>
+        <label for="winTeam">Win Team:</label>
+        <input type="text" id="winTeam" placeholder="Enter winning team" required><br><br>
+
+        <label for="chooseTeam">Bating/Bowloing</label>
+        <input type="text" id="chooseTeam" placeholder="Enter " required><br><br>
+
+        <button id="updateButton">Update</button>
+        
+    </div>
+
+    <script>
+        // Link click event
+        document.getElementById('lyout').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default anchor behavior
+    
+            const userInput = document.getElementById('matchNameInput').value;
+            // Build the URL with query parameters
+            const url = `layouts/layout1.html?inputValue=${encodeURIComponent(userInput)}`;
+                
+            // Redirect to the next page with the value
+            window.location.href = url;
+        });
+
+        document.getElementById('lyout2').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default anchor behavior
+    
+            const userInput = document.getElementById('matchNameInput').value;
+            // Build the URL with query parameters
+            const url = `layouts/layout2.html?inputValue=${encodeURIComponent(userInput)}`;
+                
+            // Redirect to the next page with the value
+            window.location.href = url;
+        });
+        document.getElementById('lyout3').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default anchor behavior
+    
+            const userInput = document.getElementById('matchNameInput').value;
+            // Build the URL with query parameters
+            const url = `layouts/layout3.html?inputValue=${encodeURIComponent(userInput)}`;
+                
+            // Redirect to the next page with the value
+            window.location.href = url;
+        });
+/////
+
+         
+    
+    </script>
+
+       
+
+        
+        <div class="team-select">
+            <label for="teamSelect">Select Team:</label>
+            <select id="teamSelect">
+                <option value="">--Select Team--</option>
+            </select>
+        </div>
+
+
+       
+         <!-- Batting Team -->
+         <div class="lab">
+            <label for="matchName1">1st Bestman Name:</label>
+            <div style="display: flex;">
+                <label style="padding-left: 40px;" for="inputID">Bestman name</label>
+                <label style=" padding-left: 50px;" for="inputID">Run</label>
+                <label style=" padding-left: 50px;" for="inputID">Ball</label>
+            </div>
+            <div style="display: flex;">
+                <input class="chekb" type="checkbox" id="checkboxPlayer1">
+                    
+             <select class="fselect"   id="matchName1" disabled>
+                        <option value="">--Select Player--</option>
+              </select>
+               
+                <input style="width: 70px;" type="tel" id="run1" placeholder="Run">
+                <input style="width: 70px;" type="tel" id="ball1" placeholder="Ball">
+                <input style="display: none;" type="text" id="four1">
+                <input style="display: none;" type="text" id="six1">
+            </div>
+            <label for="matchName2">2nd Bestman Name:</label>
+          
+
+            <div style="display: flex;">
+                <input class="chekb" type="checkbox" id="checkboxPlayer2">
+                <select class="fselect" id="matchName2" disabled>
+                    <option value="">--Select Player--</option>
+                </select>
+                <input style="width: 70px;" type="tel" id="run2" placeholder="Run">
+                <input style="width: 70px;" type="tel" id="ball2" placeholder="Ball">
+                <input  style="width: 30px; display: none;" type="text" id="four2">
+                <input style="width: 50px;  display: none;" type="text" id="six2">
+            </div>
+        </div>
+
+    
+        
+        <div class="bowler">
+
+            <!-- Bowling Team -->
+        <p> Bowling Team</p>
+
+        <div class="team-selectB">
+            <label for="teamSelectB">Select Team:</label>
+            <select id="teamSelectB">
+                <option value="">--Select Team--</option>
+            </select>
+        </div>
+        <div style="display: flex;">
+            <label style="padding-left: 40px;" for="inputID">Total Score</label>
+            <label style=" padding-left: 100px;" for="inputID">Total Overs</label>
+        </div>
+        <div style="display: flex;">
+            <input type="text" id="totalScore" value="0/0">
+            <input type="text" id="totalOvers" placeholder="Total Overs (e.g. 2.3)">
+        </div>
+        
+       
+
+        <div style="display: flex;">
+            <label style="padding-left: 0px;" for="inputID">Bowler name</label>
+            <label style=" padding-left: 90px;" for="inputID">Wicket</label>
+            <label style=" padding-left: 50px;" for="inputID">Run</label>
+            <label style=" padding-left: 50px;" for="inputID">Ball</label>
+        </div>
+        <div style="display: flex;">
+            
+                    
+            <select class="fselect"   id="bowlerName" disabled>
+                       <option value="">--Select Player--</option>
+             </select>          
+            <input style="width: 70px;" type="tel" id="wicket" placeholder="Wicket">
+            <input style="width: 70px;" type="tel" id="runBowler" placeholder="Run">
+            <input style="width: 70px;" type="tel" id="ballBowler" placeholder="Ball">
+        </div>
+        </div>
+
+        <div style="display: flex;  " class="tclass">
+
+
+            <input  type="text" id="1b" placeholder="1st" disabled class="ball-input">
+            <input style="margin-left: 10px;" type="text" id="2b" placeholder="2nd" disabled class="ball-input">
+            <input style="margin-left: 10px;" type="text" id="3b" placeholder="3rd" disabled class="ball-input">
+            <input style="margin-left: 10px;" type="text" id="4b" placeholder="4th" disabled class="ball-input">
+            <input style="margin-left: 10px;" type="text" id="5b" placeholder="5th" disabled class="ball-input">
+            <input style="margin-left: 10px;" type="text" id="6b" placeholder="6th" disabled class="ball-input">
+        </div>
+         <!-- Inputs for ball values -->
+   
+
+         <!-- Button to reset for the next over -->
+         <button style="background-color: rgb(11, 11, 209); color: aliceblue; font-size: 20px; margin-bottom: 10px;" id="cnextBtn">Next Over</button>
+
+
+         <!-- Button Group -->
+        <div class="btn">
+            <div class="btnf">
+                <button id="btn0" value="0" class="ball-btn">0</button>
+                <button id="btn1" value="1" class="ball-btn">1</button>
+                <button id="btn2" value="2" class="ball-btn">2</button>
+                <button id="btn3" value="3" class="ball-btn">3</button>
+                <button id="btn4" value="4" class="ball-btn">4</button>
+                <button id="btn6" value="6" class="ball-btn">6</button>
+            </div>
+
+            <div class="btnsec">
+                <button id="btnWide">Wide</button>
+                <button id="btnOut"  value="0" class="ball-btn">Out</button>
+                
+               
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    <script>
+
+         
+        function getQueryParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                matchId: urlParams.get('matchId')  // Extract matchId from URL
+            };
+        }
+
+        // Once the page loads, extract matchId and set it to the input field
+        window.onload = function() {
+            const params = getQueryParams();
+            const matchId = params.matchId;
+
+            // Set the matchId as the value of the matchNameInput field
+            if (matchId) {
+                document.getElementById('matchNameInput').value = matchId;
+            }
+        };
+       
+    </script>
+
+    <script type="module">
+        // Firebase Config (no change needed)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+            authDomain: "testapp-6bd8a.firebaseapp.com",
+            databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+            projectId: "testapp-6bd8a",
+            storageBucket: "testapp-6bd8a.appspot.com",
+            messagingSenderId: "1083835564982",
+            appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+        };
+    
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getDatabase, ref, set,get, update ,remove,onValue} from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+    
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app); 
+        const auth = getAuth();
+
+// Declare userId variable outside to use globally
+            let userId = null;
+           
+            let lastSelectedTeam = ''; // Store the last selected team
+            let lastSelectedPlayer1 = ''; // Store the last selected player for matchName1
+            let lastSelectedPlayer2 = ''; // Store the last selected player for matchName2
+            let lastSelectedTeamB = ''; // Store the last selected team
+            let lastSelectedPlayer3 = '';
+            
+            let matchId = new URLSearchParams(window.location.search).get('matchId'); // Get matchId from URL
+
+
+// Check if the user is authenticated
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // If the user is logged in, get the userId
+        userId = user.uid;
+        fetchTeamsAndPlayers();
+        fetchTeamsAndPlayers2();
+        console.log("Logged in as:", userId);
+    } else {
+        // If no user is logged in, handle accordingly
+        console.log("User is not logged in");
+        alert("Please log in to continue.");
+        window.location.href = "login.html"; // Redirect to login page if not logged in
+    }
+});
+
+
+
+
+
+
+ // Wa
+    
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+   // Counter to keep track of the current input field
+   // Button event handling and Firebase data saving
+   const scoreButtons = document.querySelectorAll('.ball-btn');
+const inputs = document.querySelectorAll('.ball-input'); 
+const nextBtn = document.getElementById('cnextBtn');
+let clickCount = 0;
+
+scoreButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        let customValue = e.target.value;  // Default to button's value
+
+        // Add custom logic here to assign different values
+       // Custom value for "Wide" button
+        if (e.target.id === 'btnOut') {
+            customValue = 'w';   // Custom value for "Out" button
+        } 
+        // Optionally, add more conditions for other buttons or logic.
+
+        if (clickCount < 6) {
+            // Set the custom value to the corresponding input field
+            inputs[clickCount].value = customValue;
+
+            // Save this custom value to Firebase
+            set(ref(database, `cricketmatch/${userId}/${matchId}/thisover/ball${clickCount + 1}`), customValue)
+                .then(() => console.log(`Ball ${clickCount + 1} saved with value: ${customValue}`))
+                .catch((error) => console.error('Error saving data:', error));
+
+            clickCount++;
+        }
+    });
+});
+
+// Handling the "Next" button to reset for the next over
+nextBtn.addEventListener('click', () => {
+    // Clear all input fields
+    inputs.forEach(input => input.value = '');
+    
+    // Enable all input fields again for the next over
+    inputs.forEach(input => input.disabled = false); 
+    
+    clickCount = 0;
+
+    // Remove Firebase data for the current over
+    remove(ref(database, `cricketmatch/${userId}/${matchId}/thisover`))
+        .then(() => console.log('Data for current over removed'))
+        .catch((error) => console.error('Error deleting data:', error));
+});
+
+                
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+document.getElementById('teamSelectB').addEventListener('change', function() {
+    const selectedTeamB = this.value;
+    lastSelectedTeamB = selectedTeamB; // Store the last selected team
+
+    if (selectedTeamB) {
+        // Populate the player dropdown only if necessary
+        populatePlayerDropdown2(selectedTeamB, 'bowlerName');
+        document.getElementById('bowlerName').disabled = false;
+
+        // Ensure the last selected player is still selected after the dropdown is populated
+        if (lastSelectedPlayer3 && selectedTeamB) {
+            document.getElementById('bowlerName').value = lastSelectedPlayer3;
+            displayPlayerData2(lastSelectedPlayer3, 'bowlerName');
+        }
+    } else {
+        // If no team selected, reset the player dropdown
+        clearPlayerData2('bowlerName');
+    }
+});
+
+// Function to populate the player dropdown without resetting the team selection
+function populatePlayerDropdown2(teamName, selectId) {
+    const playersRef = ref(database, `cricketmatch/${userId}/${matchId}/team/${teamName}`);
+    onValue(playersRef, (snapshot) => {
+        const playersData = snapshot.val();
+        const playerSelect = document.getElementById(selectId);
+        playerSelect.innerHTML = '<option value="">--Select Player--</option>'; // Reset dropdown to first option
+
+        if (playersData) {
+            Object.keys(playersData).forEach(playerName => {
+                const option = document.createElement('option');
+                option.value = playerName;
+                option.textContent = playerName;
+                playerSelect.appendChild(option);
+            });
+        }
+
+        // If there was a previously selected player, set it again after populating
+        if (lastSelectedPlayer3) {
+            document.getElementById(selectId).value = lastSelectedPlayer3; // Ensure player is re-selected
+        }
+    });
+}
+
+// Fetch teams from Firebase and populate team dropdown
+function fetchTeamsAndPlayers2() {
+    const teamsRef = ref(database, `cricketmatch/${userId}/${matchId}/team`);
+    onValue(teamsRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            const teamSelectB = document.getElementById('teamSelectB');
+            teamSelectB.innerHTML = '<option value="">--Select Team--</option>';
+            Object.keys(data).forEach(teamName => {
+                const option = document.createElement('option');
+                option.value = teamName;
+                option.textContent = teamName;
+                teamSelectB.appendChild(option);
+            });
+        }
+       
+         // Restore the previously selected team after updating the dropdown
+         if (lastSelectedTeamB) {
+            teamSelectB.value = lastSelectedTeamB;
+            if(lastSelectedTeamB){
+                populatePlayerDropdown2(lastSelectedTeamB,'bowlerName')
+            }
+        }
+
+       
+
+       
+    });
+}
+
+// Function to display player data in the input fields
+function displayPlayerData2(playerName, selectId) {
+    const selectedTeamB = document.getElementById('teamSelectB').value;
+    const playerRef = ref(database, `cricketmatch/${userId}/${matchId}/team/${selectedTeamB}/${playerName}`);
+    onValue(playerRef, (snapshot) => {
+        const playerData = snapshot.val();
+        if (selectId === 'bowlerName') {
+            document.getElementById('wicket').value = playerData?.wicket || '0';
+            document.getElementById('runBowler').value = playerData?.bowrun || '0';
+            document.getElementById('ballBowler').value = playerData?.bowball || '0';
+           
+        }
+    });
+}
+
+// When the player is changed in the dropdown, update the data in inputs
+document.getElementById('bowlerName').addEventListener('change', function() {
+    const selectedPlayer = this.value;
+    lastSelectedPlayer3 = selectedPlayer; // Store the last selected player
+    if (selectedPlayer) {
+        displayPlayerData2(selectedPlayer, 'bowlerName');
+    } else {
+        clearPlayerData2('bowlerName');
+    }
+});
+
+// Clear player data if player is unselected
+function clearPlayerData2(selectId) {
+    if (selectId === 'bowlerName') {
+        document.getElementById('wicket').value = '';
+        document.getElementById('runBowler').value = '';
+        document.getElementById('ballBowler').value = '';
+       
+    }
+}
+
+// Update player data when any button is clicked
+document.querySelectorAll('.ball-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const bbowlId = 'ballBowler';
+        const bowrunId = 'runBowler';
+        const wicketId = 'wicket';
+        
+        updatePlayerData2(lastSelectedTeamB, lastSelectedPlayer3, bbowlId, bowrunId, wicketId);
+    });
+});
+
+// Function to update player data in Firebase
+function updatePlayerData2(teamName, playerName, bbowlId, bowrunId, wicketId) {
+    const bowrun = document.getElementById(bowrunId).value;
+    const ball = document.getElementById(bbowlId).value;
+    const wicket = document.getElementById(wicketId).value;
+    
+
+    const playerRef = ref(database, `cricketmatch/${userId}/${matchId}/team/${teamName}/${playerName}`);
+
+    update(playerRef, {
+        bowrun: bowrun,
+        bowball: ball,
+        wicket: wicket,
+       
+    })
+    .then(() => {
+        console.log('Player data updated successfully');
+    })
+    .catch((error) => {
+        console.error('Error updating player data:', error);
+    });
+}
+
+
+            ///////////////////////////////////
+
+
+            
+        
+            // Fetch teams and players from Firebase
+            function fetchTeamsAndPlayers() {
+                const teamsRef = ref(database, `cricketmatch/${userId}/${matchId}/team`);
+                onValue(teamsRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        const teamSelect = document.getElementById('teamSelect');
+                        teamSelect.innerHTML = '<option value="">--Select Team--</option>';
+                        Object.keys(data).forEach(teamName => {
+                            const option = document.createElement('option');
+                            option.value = teamName;
+                            option.textContent = teamName;
+                            teamSelect.appendChild(option);
+                        });
+        
+                        // Set last selected team if exists
+                        if (lastSelectedTeam) {
+                            teamSelect.value = lastSelectedTeam;
+                            if (lastSelectedTeam) {
+                                populatePlayerDropdown(lastSelectedTeam, 'matchName1');
+                                populatePlayerDropdown(lastSelectedTeam, 'matchName2');
+                            }
+                        }
+                    }
+                });
+            }
+        
+            // Checkbox event listener (only one can be selected at a time)
+            document.getElementById('checkboxPlayer1').addEventListener('change', function() {
+                // If Player 1 is checked, uncheck Player 2
+                if (this.checked) {
+                    document.getElementById('checkboxPlayer2').checked = false; 
+                }
+            });
+        
+            document.getElementById('checkboxPlayer2').addEventListener('change', function() {
+                // If Player 2 is checked, uncheck Player 1
+                if (this.checked) {
+                    document.getElementById('checkboxPlayer1').checked = false; 
+                }
+            });
+        
+            // Event listener for team selection
+            document.getElementById('teamSelect').addEventListener('change', function() {
+                const selectedTeam = this.value;
+                lastSelectedTeam = selectedTeam; // Store the last selected team
+        
+                if (selectedTeam) {
+                    populatePlayerDropdown(selectedTeam, 'matchName1');
+                    populatePlayerDropdown(selectedTeam, 'matchName2');
+                    document.getElementById('matchName1').disabled = false;
+                    document.getElementById('matchName2').disabled = false;
+                } else {
+                    resetPlayerDropdowns();
+                    clearPlayerData('matchName1');
+                    clearPlayerData('matchName2');
+                }
+            });
+        
+             // Event listener for team selection
+        
+
+            // Populate player dropdown
+            function populatePlayerDropdown(teamName, selectId) {
+                const playersRef = ref(database, `cricketmatch/${userId}/${matchId}/team/${teamName}`);
+                onValue(playersRef, (snapshot) => {
+                    const playersData = snapshot.val();
+                    const playerSelect = document.getElementById(selectId);
+                    const currentSelection = playerSelect.value; // Retain current selection if possible
+                    playerSelect.innerHTML = '<option value="">--Select Player--</option>';
+                    if (playersData) {
+                        Object.keys(playersData).forEach(player => {
+                            const option = document.createElement('option');
+                            option.value = player;
+                            option.textContent = player;
+                            playerSelect.appendChild(option);
+                        });
+                    }
+                    // Restore the previous player selection after populating
+                    playerSelect.value = currentSelection;
+                });
+            }
+        
+            // Reset player dropdowns
+            function resetPlayerDropdowns() {
+                const playerSelect1 = document.getElementById('matchName1');
+                const playerSelect2 = document.getElementById('matchName2');
+                playerSelect1.innerHTML = '<option value="">--Select Player--</option>';
+                playerSelect2.innerHTML = '<option value="">--Select Player--</option>';
+            }
+        
+            // Clear player data inputs
+            function clearPlayerData(selectId) {
+                if (selectId === 'matchName1') {
+                    document.getElementById('run1').value = '';
+                    document.getElementById('ball1').value = '';
+                    document.getElementById('four1').value = '';
+                    document.getElementById('six1').value = '';
+
+                   
+                } else if (selectId === 'matchName2') {
+                    document.getElementById('run2').value = '';
+                    document.getElementById('ball2').value = '';
+                    document.getElementById('four2').value = '';
+                    document.getElementById('six2').value = '';
+                   
+                }
+            }
+        
+            // Display player data in input fields for selected player
+            function displayPlayerData(playerName, selectId) {
+                const selectedTeam = document.getElementById('teamSelect').value;
+                const playerRef = ref(database, `cricketmatch/${userId}/${matchId}/team/${selectedTeam}/${playerName}`);
+                onValue(playerRef, (snapshot) => {
+                    const playerData = snapshot.val();
+                    if (selectId === 'matchName1') {
+                        document.getElementById('run1').value = playerData.batRun || '0';
+                        document.getElementById('ball1').value = playerData.bball || '0';
+                       
+                        document.getElementById('four1').value = playerData.four || '0';
+                        document.getElementById('six1').value = playerData.six || '0';
+                    } else if (selectId === 'matchName2') {
+                        document.getElementById('run2').value = playerData.batRun || '0';
+                        document.getElementById('ball2').value = playerData.bball || '0';
+                     
+                        document.getElementById('four2').value = playerData.four || '0';
+                        document.getElementById('six2').value = playerData.six || '0';
+                    }
+                });
+            }
+        
+            // Event listener for player selection
+            document.getElementById('matchName1').addEventListener('change', function() {
+                const selectedPlayer = this.value;
+                lastSelectedPlayer1 = selectedPlayer; // Store the last selected player for matchName1
+                if (selectedPlayer) {
+                    displayPlayerData(selectedPlayer, 'matchName1');
+                } else {
+                    clearPlayerData('matchName1');
+                }
+            });
+        
+            document.getElementById('matchName2').addEventListener('change', function() {
+                const selectedPlayer = this.value;
+                lastSelectedPlayer2 = selectedPlayer; // Store the last selected player for matchName2
+                if (selectedPlayer) {
+                    displayPlayerData(selectedPlayer, 'matchName2');
+                } else {
+                    clearPlayerData('matchName2');
+                }
+            });
+        
+// ////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////
+            
+           
+    
+const bt4 = document.getElementById('btn4');
+bt4.addEventListener('click', function() {
+    // Get the current value from the wicket field (if needed)
+
+    let selectedPlayer;
+    let selectedBallInput;
+
+    // Check if Player 1 checkbox is checked
+    if (document.getElementById('checkboxPlayer1').checked) {
+        selectedPlayer = document.getElementById('matchName1').value;
+        if (selectedPlayer) {
+            selectedBallInput = document.getElementById('four1');
+            const currentBall = parseInt(selectedBallInput.value, 10) || 0;
+
+            // Increment ball by 1
+            selectedBallInput.value = currentBall + 1;
+
+            // Update Firebase data for Player 1
+            const selectedTeam = document.getElementById('teamSelect').value;
+            if (selectedTeam && selectedPlayer) {
+                updatePlayerData(selectedTeam, selectedPlayer, 'run1', 'ball1', 'four1','six1');
+            }
+        }
+    }
+
+    // Check if Player 2 checkbox is checked
+    else if (document.getElementById('checkboxPlayer2').checked) {
+        selectedPlayer = document.getElementById('matchName2').value;
+        if (selectedPlayer) {
+            selectedBallInput = document.getElementById('four2');
+            const currentBall = parseInt(selectedBallInput.value, 10) || 0;
+
+            // Increment ball by 1
+            selectedBallInput.value = currentBall + 1;
+
+            // Update Firebase data for Player 2
+            const selectedTeam = document.getElementById('teamSelect').value;
+            if (selectedTeam && selectedPlayer) {
+                updatePlayerData(selectedTeam, selectedPlayer, 'run2', 'ball2', 'four2','six2');
+            }
+        }
+    }
+});
+
+    
+const bt6 = document.getElementById('btn6');
+bt6.addEventListener('click', function() {
+    // Get the current value from the wicket field (if needed)
+
+    let selectedPlayer;
+    let selectedBallInput;
+
+    // Check if Player 1 checkbox is checked
+    if (document.getElementById('checkboxPlayer1').checked) {
+        selectedPlayer = document.getElementById('matchName1').value;
+        if (selectedPlayer) {
+            selectedBallInput = document.getElementById('six1');
+            const currentBall = parseInt(selectedBallInput.value, 10) || 0;
+
+            // Increment ball by 1
+            selectedBallInput.value = currentBall + 1;
+
+            // Update Firebase data for Player 1
+            const selectedTeam = document.getElementById('teamSelect').value;
+            if (selectedTeam && selectedPlayer) {
+                updatePlayerData(selectedTeam, selectedPlayer, 'run1', 'ball1', 'four1','six1');
+            }
+        }
+    }
+
+    // Check if Player 2 checkbox is checked
+    else if (document.getElementById('checkboxPlayer2').checked) {
+        selectedPlayer = document.getElementById('matchName2').value;
+        if (selectedPlayer) {
+            selectedBallInput = document.getElementById('six2');
+            const currentBall = parseInt(selectedBallInput.value, 10) || 0;
+
+            // Increment ball by 1
+            selectedBallInput.value = currentBall + 1;
+
+            // Update Firebase data for Player 2
+            const selectedTeam = document.getElementById('teamSelect').value;
+            if (selectedTeam && selectedPlayer) {
+                updatePlayerData(selectedTeam, selectedPlayer, 'run2', 'ball2', 'four2','six2');
+            }
+        }
+    }
+});
+
+// ////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+            // Event listener for ball-btn (1, 2, 3, 4, 6 runs) buttons
+            const addRunButtons = document.querySelectorAll('.ball-btn');
+            addRunButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const runValue = parseInt(this.value, 10); // Run value from the button
+                    let selectedPlayer = null;
+                    let selectedRunInput, selectedBallInput;
+        
+                    // Check if Player 1 checkbox is checked
+                    if (document.getElementById('checkboxPlayer1').checked) {
+                        selectedPlayer = document.getElementById('matchName1').value;
+                        if (selectedPlayer) {
+                            selectedRunInput = document.getElementById('run1');
+                            selectedBallInput = document.getElementById('ball1');
+                            const currentRun = parseInt(selectedRunInput.value, 10) || 0;
+                            const currentBall = parseInt(selectedBallInput.value, 10) || 0;
+        
+                            // Update the run and ball values
+                            selectedRunInput.value = currentRun + runValue;
+                            selectedBallInput.value = currentBall + 1; // Increment ball by 1
+        
+                            // Update Firebase data for Player 1
+                            const selectedTeam = document.getElementById('teamSelect').value;
+                            const selectedPlayerName = document.getElementById('matchName1').value;
+                            if (selectedPlayerName) {
+                                updatePlayerData(selectedTeam, selectedPlayerName, 'run1', 'ball1', 'four1','six1');
+                            }
+                        }
+                    }
+                    // Check if Player 2 checkbox is checked
+                    else if (document.getElementById('checkboxPlayer2').checked) {
+                        selectedPlayer = document.getElementById('matchName2').value;
+                        if (selectedPlayer) {
+                            selectedRunInput = document.getElementById('run2');
+                            selectedBallInput = document.getElementById('ball2');
+                            const currentRun = parseInt(selectedRunInput.value, 10) || 0;
+                            const currentBall = parseInt(selectedBallInput.value, 10) || 0;
+        
+                            // Update the run and ball values
+                            selectedRunInput.value = currentRun + runValue;
+                            selectedBallInput.value = currentBall + 1; // Increment ball by 1
+        
+                            // Update Firebase data for Player 2
+                            const selectedTeam = document.getElementById('teamSelect').value;
+                            const selectedPlayerName = document.getElementById('matchName2').value;
+                            if (selectedPlayerName) {
+                                updatePlayerData(selectedTeam, selectedPlayerName, 'run2', 'ball2',  'four2','six2');
+                            }
+                        }
+                    }
+                });
+            });
+        
+
+            
+            function updatePlayerData(teamName, playerName, runId, ballId, fourId, sixId) {
+    // Get the current values of the fields
+    const run = document.getElementById(runId).value;
+    const ball = document.getElementById(ballId).value;
+    const four = document.getElementById(fourId).value;
+    const six = document.getElementById(sixId).value;
+
+    // Define the reference to the player's data in Firebase
+    const playerRef = ref(database, `cricketmatch/${userId}/${matchId}/team/${teamName}/${playerName}`);
+
+    // Use the `update()` method to update only the specified fields
+    update(playerRef, {
+        batRun: run,    // Update the run
+        bball: ball,    // Update the ball count
+        four: four,     // Update the four count
+        six: six        // Update the six count
+    })
+    .then(() => {
+        console.log('Player data updated successfully');
+    })
+    .catch((error) => {
+        console.error('Error updating player data:', error);
+    });
+}
+
+        
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Variables to store current state of score and overs
+        let currentScore = 0;  // For total score
+        let currentWickets = 0; // For total wickets
+        let totalBalls = 0; // For counting balls in current over
+        let currentOvers = 0; // For total overs (decimal format)
+    
+        // Function to update the total overs
+        function updateTotalOvers() {
+            const totalOvers = document.getElementById('totalOvers').value;
+            let [overs, balls] = totalOvers.split('.').map(Number);
+    
+            // If balls are undefined, we assume they are 0
+            balls = balls || 0;
+    
+            balls += 1;  // Increment ball count with each input change
+    
+            if (balls >= 6) {
+                overs += 1;  // If 6 balls are hit, increment over count
+                balls = 0;    // Reset balls to 0
+            }
+    
+            document.getElementById('totalOvers').value = `${overs}.${balls}`;
+        }
+    
+        // Extract score and wickets from totalScore
+        function parseScoreWickets() {
+            const totalScore = document.getElementById('totalScore').value;
+            const [score, wickets] = totalScore.split('/').map(Number);
+            return { score, wickets };
+        }
+    
+        function updateMatchData() {
+    if (!userId) {
+        console.error("userId is not defined.");
+        return; // Exit if userId is not available
+    }
+
+    const matchName = document.getElementById('matchNameInput').value;
+    const matchRef = ref(database, `cricketmatch/${userId}/${matchId}/currentOver`);
+
+   
+    
+
+    const batingteam = document.getElementById('teamSelect').value;
+    const bowlingteam = document.getElementById('teamSelectB').value;
+
+    const bestman1 = document.getElementById('matchName1').value;
+    const bestman2 = document.getElementById('matchName2').value;
+    const run1 = document.getElementById('run1').value;
+    const run2 = document.getElementById('run2').value;
+    const ball1 = document.getElementById('ball1').value;
+    const ball2 = document.getElementById('ball2').value;
+    const { score, wickets } = parseScoreWickets();
+    const totalScore = score;
+    const totalOvers = document.getElementById('totalOvers').value;
+    const name = document.getElementById('bowlerName').value;
+    const wicketsBowler = document.getElementById('wicket').value;
+    const runsBowler = document.getElementById('runBowler').value;
+    const ballsBowler = document.getElementById('ballBowler').value;
+
+    // Update Firebase with the latest match data using userId and matchName
+    update(matchRef, {
+        batingteam:batingteam,
+        bowlingteam:bowlingteam,
+       
+        bestman1: bestman1,
+        bestman2: bestman2,
+        run1: run1,
+        run2: run2,
+        ball1: ball1,
+        ball2: ball2,
+        totalScore: `${score}/${wickets}`,
+        totalOvers: totalOvers,
+        name: name,
+        wicketsBowler: wicketsBowler,
+        runsBowler: runsBowler,
+        ballsBowler: ballsBowler,
+    });
+}
+
+    
+        // Call the update function when input changes
+        document.getElementById('matchNameInput').addEventListener('input', updateMatchData);
+        document.getElementById('run1').addEventListener('input', updateMatchData);
+        document.getElementById('run2').addEventListener('input', updateMatchData);
+        document.getElementById('ball1').addEventListener('input', updateMatchData);
+        document.getElementById('ball2').addEventListener('input', updateMatchData);
+        document.getElementById('totalScore').addEventListener('input', updateMatchData);
+        document.getElementById('totalOvers').addEventListener('input', updateMatchData);
+        document.getElementById('wicket').addEventListener('input', updateMatchData);
+        document.getElementById('runBowler').addEventListener('input', updateMatchData);
+        document.getElementById('ballBowler').addEventListener('input', updateMatchData);
+    
+        // // Button click events for scoring and wickets
+        // document.getElementById('btn0').addEventListener('click', () => {
+        //     updateMatchData();
+        //     saveMatchScore(); 
+        // });
+        // document.getElementById('btn1').addEventListener('click', () => {
+        //     updateMatchData();
+        //     saveMatchScore(); 
+           
+        // });
+    
+        // document.getElementById('btn2').addEventListener('click', () => {
+        //     updateMatchData();
+        //     saveMatchScore(); 
+        // });
+    
+        // document.getElementById('btn3').addEventListener('click', () => {
+        //     updateMatchData();
+        //     saveMatchScore(); 
+        // });
+    
+        // document.getElementById('btn4').addEventListener('click', () => {
+        //     updateMatchData();
+        //     saveMatchScore(); 
+        // });
+    
+        // document.getElementById('btn6').addEventListener('click', () => {
+        //     updateMatchData();
+        //     saveMatchScore(); 
+        // });
+    
+        // document.getElementById('btnOut').addEventListener('click', () => {
+        //     updateMatchData();
+             
+        // });
+    
+        // // Attach event listeners to input fields
+        // document.querySelectorAll('input').forEach(input => {
+        //     input.addEventListener('input', updateMatchData);
+        // });
+
+    
+    
+
+
+       
+        // Get references to the input fields and buttons
+        const inputField = document.getElementById('totalScore');
+        const wicketField = document.getElementById('wicket');
+        const oversField = document.getElementById('totalOvers');
+        const bowlOversField = document.getElementById('ballBowler');
+        const bolwrun = document.getElementById('runBowler');
+
+      
+        const btn0 = document.getElementById('btn0');
+        const btnRun = document.getElementById('btn1');
+        const btnWicket = document.getElementById('btnOut');
+
+        const btnRun2 = document.getElementById('btn2');
+        const btnRun3 = document.getElementById('btn3');
+
+        const btnRun4 = document.getElementById('btn4');
+        const btnRun6 = document.getElementById('btn6');
+
+        const btnWide = document.getElementById('btnWide');
+        const btnNoball = document.getElementById('btnNoBall');
+
+
+        // Helper function to update overs and handle conversion to full overs (1 over = 6 balls)
+        function updateOvers() {
+            let oversValue = parseFloat(oversField.value) || 0; // Default to 0 if invalid input
+            let fullOvers = Math.floor(oversValue); // Whole overs part (e.g., 1 from 1.5)
+            let ballPart = oversValue - fullOvers; // Decimal part (e.g., 0.5 from 1.5)
+
+            if (ballPart >= 0.6) {
+                fullOvers += 1; // Increment overs when balls reach 6
+                ballPart = 0; // Reset balls after full over completion
+            }
+
+            oversField.value = (fullOvers + ballPart).toFixed(1);
+        }
+
+        function updateBowlOvers() {
+            let oversValue = parseFloat(bowlOversField.value) || 0;
+            let fullOvers = Math.floor(oversValue);
+            let ballPart = oversValue - fullOvers;
+
+            if (ballPart >= 0.6) {
+                fullOvers += 1;
+                ballPart = 0;
+            }
+
+            bowlOversField.value = (fullOvers + ballPart).toFixed(1);
+        }
+
+          
+
+       
+
+        
+        // Add event listener to the "Run" button
+        btnRun.addEventListener('click', function() {
+
+             // Get the current value from the bolwrun field
+             let currentRun = parseInt(bolwrun.value) || 0;
+
+                // Increment the bolwrun count by 1
+                currentRun += 1;
+
+                 // Update the bolwrun with the new value
+                 bolwrun.value = currentRun;
+
+
+
+            let inputValue = inputField.value.trim();
+            let parts = inputValue.split('/');
+
+            if (parts.length === 2) {
+                let run = parseInt(parts[0]) || 0;
+                let wicket = parseInt(parts[1]) || 0;
+
+                if (!isNaN(run) && !isNaN(wicket)) {
+                    // Increment the run value by 1
+                    run += 1;
+                    inputField.value = run + '/' + wicket;
+
+                    // Increment the overs by 0.1 (one ball)
+                    let oversValue = parseFloat(oversField.value) || 0;
+                    oversValue += 0.1;
+                    oversField.value = oversValue.toFixed(1);
+
+                    let oversValue2 = parseFloat(bowlOversField.value) || 0;
+                    oversValue2 += 0.1;
+                    bowlOversField.value = oversValue2.toFixed(1);
+
+                    // Update overs if it reaches or exceeds 6 balls
+                    updateOvers();
+                    updateBowlOvers();
+                    updateMatchData();
+                    saveMatchScore(); 
+                } else {
+                    alert('Invalid input. Please make sure to enter the format as "number/number".');
+                }
+            } else {
+                alert('Invalid format. Please enter the value in the format "run/wicket".');
+            }
+        });
+
+
+          // Add event listener to the "Run" button
+          btn0.addEventListener('click', function() {
+
+// Get the current value from the bolwrun field
+let currentRun = parseInt(bolwrun.value) || 0;
+
+   // Increment the bolwrun count by 1
+   currentRun += 0;
+
+    // Update the bolwrun with the new value
+    bolwrun.value = currentRun;
+
+
+
+let inputValue = inputField.value.trim();
+let parts = inputValue.split('/');
+
+if (parts.length === 2) {
+   let run = parseInt(parts[0]) || 0;
+   let wicket = parseInt(parts[1]) || 0;
+
+   if (!isNaN(run) && !isNaN(wicket)) {
+       // Increment the run value by 1
+       run += 0;
+       inputField.value = run + '/' + wicket;
+
+       // Increment the overs by 0.1 (one ball)
+       let oversValue = parseFloat(oversField.value) || 0;
+       oversValue += 0.1;
+       oversField.value = oversValue.toFixed(1);
+
+       let oversValue2 = parseFloat(bowlOversField.value) || 0;
+       oversValue2 += 0.1;
+       bowlOversField.value = oversValue2.toFixed(1);
+
+       // Update overs if it reaches or exceeds 6 balls
+       updateOvers();
+       updateBowlOvers();
+       updateMatchData();
+       saveMatchScore(); 
+   } else {
+       alert('Invalid input. Please make sure to enter the format as "number/number".');
+   }
+} else {
+   alert('Invalid format. Please enter the value in the format "run/wicket".');
+}
+});
+
+        // Add event listener to the "Wicket" button
+        btnWicket.addEventListener('click', function() {
+            // Get the current value from the wicket field
+            let currentWickets = parseInt(wicketField.value) || 0;
+
+            // Increment the wicket count by 1
+            currentWickets += 1;
+
+            // Update the wicketField with the new value
+            wicketField.value = currentWickets;
+
+            // Now we will update the score (runs/wickets)
+            let inputValue = inputField.value.trim();
+            let parts = inputValue.split('/');
+
+            if (parts.length === 2) {
+                let run = parseInt(parts[0]) || 0;
+                let wicket = parseInt(parts[1]) || 0;
+
+                if (!isNaN(run) && !isNaN(wicket)) {
+                    // Increment the wicket value by 1
+                    wicket += 1;
+                    inputField.value = run + '/' + wicket;
+
+                    // Increment the overs by 0.1 (one ball)
+                    let oversValue = parseFloat(oversField.value) || 0;
+                    oversValue += 0.1;
+                    oversField.value = oversValue.toFixed(1);
+
+                    let oversValue2 = parseFloat(bowlOversField.value) || 0;
+                    oversValue2 += 0.1;
+                    bowlOversField.value = oversValue2.toFixed(1);
+
+                    // Update overs if it reaches or exceeds 6 balls
+                    updateOvers();
+                    updateBowlOvers();
+                    updateMatchData();
+                    saveMatchScore(); 
+                } else {
+                    alert('Invalid input. Please make sure to enter the format as "number/number".');
+                }
+            } else {
+                alert('Invalid format. Please enter the value in the format "run/wicket".');
+            }
+        });
+        
+
+     
+
+    btnRun2.addEventListener('click', function() {
+
+             // Get the current value from the bolwrun field
+             let currentRun = parseInt(bolwrun.value) || 0;
+
+                // Increment the bolwrun count by 1
+                currentRun += 2;
+
+                 // Update the bolwrun with the new value
+                 bolwrun.value = currentRun;
+
+
+
+            let inputValue = inputField.value.trim();
+            let parts = inputValue.split('/');
+
+            if (parts.length === 2) {
+                let run = parseInt(parts[0]) || 0;
+                let wicket = parseInt(parts[1]) || 0;
+
+                if (!isNaN(run) && !isNaN(wicket)) {
+                    // Increment the run value by 1
+                    run += 2;
+                    inputField.value = run + '/' + wicket;
+
+                    // Increment the overs by 0.1 (one ball)
+                    let oversValue = parseFloat(oversField.value) || 0;
+                    oversValue += 0.1;
+                    oversField.value = oversValue.toFixed(1);
+
+                    let oversValue2 = parseFloat(bowlOversField.value) || 0;
+                    oversValue2 += 0.1;
+                    bowlOversField.value = oversValue2.toFixed(1);
+
+                    // Update overs if it reaches or exceeds 6 balls
+                    updateOvers();
+                    updateBowlOvers();
+                    updateMatchData();
+                
+                    saveMatchScore(); 
+                } else {
+                    alert('Invalid input. Please make sure to enter the format as "number/number".');
+                }
+            } else {
+                alert('Invalid format. Please enter the value in the format "run/wicket".');
+            }
+        });
+
+
+    btnRun3.addEventListener('click', function() {
+
+// Get the current value from the bolwrun field
+let currentRun = parseInt(bolwrun.value) || 0;
+
+   // Increment the bolwrun count by 1
+   currentRun += 3;
+
+    // Update the bolwrun with the new value
+    bolwrun.value = currentRun;
+
+
+
+let inputValue = inputField.value.trim();
+let parts = inputValue.split('/');
+
+if (parts.length === 2) {
+   let run = parseInt(parts[0]) || 0;
+   let wicket = parseInt(parts[1]) || 0;
+
+   if (!isNaN(run) && !isNaN(wicket)) {
+       // Increment the run value by 1
+       run += 3;
+       inputField.value = run + '/' + wicket;
+
+       // Increment the overs by 0.1 (one ball)
+       let oversValue = parseFloat(oversField.value) || 0;
+       oversValue += 0.1;
+       oversField.value = oversValue.toFixed(1);
+
+       let oversValue2 = parseFloat(bowlOversField.value) || 0;
+       oversValue2 += 0.1;
+       bowlOversField.value = oversValue2.toFixed(1);
+
+       // Update overs if it reaches or exceeds 6 balls
+       updateOvers();
+       updateBowlOvers();
+       updateMatchData();
+       saveMatchScore(); 
+   } else {
+       alert('Invalid input. Please make sure to enter the format as "number/number".');
+   }
+} else {
+   alert('Invalid format. Please enter the value in the format "run/wicket".');
+}
+});
+
+
+
+    btnRun4.addEventListener('click', function() {
+
+// Get the current value from the bolwrun field
+let currentRun = parseInt(bolwrun.value) || 0;
+
+   // Increment the bolwrun count by 1
+   currentRun += 4;
+
+    // Update the bolwrun with the new value
+    bolwrun.value = currentRun;
+
+
+
+let inputValue = inputField.value.trim();
+let parts = inputValue.split('/');
+
+if (parts.length === 2) {
+   let run = parseInt(parts[0]) || 0;
+   let wicket = parseInt(parts[1]) || 0;
+
+   if (!isNaN(run) && !isNaN(wicket)) {
+       // Increment the run value by 1
+       run += 4;
+       inputField.value = run + '/' + wicket;
+
+       // Increment the overs by 0.1 (one ball)
+       let oversValue = parseFloat(oversField.value) || 0;
+       oversValue += 0.1;
+       oversField.value = oversValue.toFixed(1);
+
+       let oversValue2 = parseFloat(bowlOversField.value) || 0;
+       oversValue2 += 0.1;
+       bowlOversField.value = oversValue2.toFixed(1);
+
+       // Update overs if it reaches or exceeds 6 balls
+       updateOvers();
+       updateBowlOvers();
+       updateMatchData();
+       saveMatchScore(); 
+   } else {
+       alert('Invalid input. Please make sure to enter the format as "number/number".');
+   }
+} else {
+   alert('Invalid format. Please enter the value in the format "run/wicket".');
+}
+});
+
+
+
+    btnRun6.addEventListener('click', function() {
+
+// Get the current value from the bolwrun field
+let currentRun = parseInt(bolwrun.value) || 0;
+
+   // Increment the bolwrun count by 1
+   currentRun += 6;
+
+    // Update the bolwrun with the new value
+    bolwrun.value = currentRun;
+
+
+
+let inputValue = inputField.value.trim();
+let parts = inputValue.split('/');
+
+if (parts.length === 2) {
+   let run = parseInt(parts[0]) || 0;
+   let wicket = parseInt(parts[1]) || 0;
+
+   if (!isNaN(run) && !isNaN(wicket)) {
+       // Increment the run value by 1
+       run += 6;
+       inputField.value = run + '/' + wicket;
+
+       // Increment the overs by 0.1 (one ball)
+       let oversValue = parseFloat(oversField.value) || 0;
+       oversValue += 0.1;
+       oversField.value = oversValue.toFixed(1);
+
+       let oversValue2 = parseFloat(bowlOversField.value) || 0;
+       oversValue2 += 0.1;
+       bowlOversField.value = oversValue2.toFixed(1);
+
+       // Update overs if it reaches or exceeds 6 balls
+       updateOvers();
+       updateBowlOvers();
+       updateMatchData();
+       saveMatchScore(); 
+   } else {
+       alert('Invalid input. Please make sure to enter the format as "number/number".');
+   }
+} else {
+   alert('Invalid format. Please enter the value in the format "run/wicket".');
+}
+});
+   
+
+  btnWide.addEventListener('click', function() {
+
+// Get the current value from the bolwrun field
+let currentRun = parseInt(bolwrun.value) || 0;
+
+   // Increment the bolwrun count by 1
+   currentRun += 1;
+
+    // Update the bolwrun with the new value
+    bolwrun.value = currentRun;
+
+
+
+let inputValue = inputField.value.trim();
+let parts = inputValue.split('/');
+
+if (parts.length === 2) {
+   let run = parseInt(parts[0]) || 0;
+   let wicket = parseInt(parts[1]) || 0;
+
+   if (!isNaN(run) && !isNaN(wicket)) {
+       // Increment the run value by 1
+       run += 1;
+       inputField.value = run + '/' + wicket;
+
+       updateMatchData();
+       saveMatchScore(); 
+
+
+
+       
+   } else {
+       alert('Invalid input. Please make sure to enter the format as "number/number".');
+   }
+} else {
+   alert('Invalid format. Please enter the value in the format "run/wicket".');
+}
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////]]]]]---------/
+// ----------------------------------------------------------------------------------------------------------------------
+
+    
+     </script>
+
+   
+
+</body>
+</html>

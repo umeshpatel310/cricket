@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            background-color: black;
+            text-align: center;
+        }
+
+        .input-field {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 40%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            margin-top: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #login-error-message {
+            color: red;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: rgb(181, 201, 0);
+        }
+
+        h2 {
+            font-size: 20px;
+            color: white;
+        }
+
+        p {
+            color: aliceblue;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1> Layout.com</h1>
+    <h2>Login</h2>
+
+    <!-- Login Form -->
+    <div id="login-container">
+        <input type="email" id="login-email" class="input-field" placeholder="Enter your email" required>
+        <input type="password" id="login-password" class="input-field" placeholder="Enter your password" required>
+        
+        <button id="login-button">Login</button>
+        <div id="login-error-message"></div>
+
+        <p>Don't have an account?</p>
+        <a style="color: #ccc;" href="code/signup.html">Signup</a>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Firebase configuration (replace with your actual config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy1GnNAIpiTbF8bcE960GROx9JVyyn3Ro",
+            authDomain: "testapp-6bd8a.firebaseapp.com",
+            databaseURL: "https://testapp-6bd8a-default-rtdb.firebaseio.com",
+            projectId: "testapp-6bd8a",
+            storageBucket: "testapp-6bd8a.appspot.com",
+            messagingSenderId: "1083835564982",
+            appId: "1:1083835564982:web:7ef2ecfe620f7f81d43717",
+        };
+
+        // Importing Firebase services (modular approach)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        // Function to login user
+        async function loginUser() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                // Sign in user with email and password
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("Logged in as:", user.email);
+
+                // Redirect to home page after successful login
+                // Pass user UID to home.html using localStorage (as an example of state management)
+                localStorage.setItem('userUID', user.uid);
+
+                // Redirect to the homepage
+                window.location.href = "code/home.html";  
+            } catch (error) {
+                // Handle Errors
+                const errorMessage = error.message;
+                document.getElementById('login-error-message').innerText = `Error: ${errorMessage}`;
+                console.log(errorMessage);
+            }
+        }
+
+        // Attach the login function to the login button
+        document.getElementById('login-button').addEventListener('click', loginUser);
+    </script>
+
+</body>
+</html>
